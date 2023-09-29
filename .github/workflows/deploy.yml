@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check folders
-        run: | 
+        run: |
           ls
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,7 +31,7 @@ jobs:
       - name: Check clone
         run: |
           ls
-          cd ~/server
+          cd ${{ github.workspace }}/server
           ls
       # - name: Print Environment Variables
       #   run: |
