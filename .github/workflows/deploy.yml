@@ -43,4 +43,4 @@ jobs:
         run: |
           echo "GitHub Context:"
           echo "----------------"
-          env | grep GITHUB
+          env
