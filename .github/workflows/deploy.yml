@@ -39,8 +39,14 @@ jobs:
           echo "GitHub Workflow: $GITHUB_WORKFLOW"
           # You can add more environment variables as needed
           
+      - name: Print Env Context
+        run: |
+          echo "Env Context:"
+          echo "----------------"
+          env
+          
       - name: Print GitHub Context
         run: |
           echo "GitHub Context:"
           echo "----------------"
-          env
+          github
