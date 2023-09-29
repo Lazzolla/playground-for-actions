@@ -8,7 +8,8 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    tag:
+    inputs:
+      tag:
         description: 'The tag we want to deploy. E.g: v3.96.0'
         required: true
 jobs:
