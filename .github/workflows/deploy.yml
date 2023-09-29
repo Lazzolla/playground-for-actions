@@ -30,8 +30,9 @@ jobs:
           path: server/renameme
       - name: Check clone
         run: |
-          ls
           cd ${{ github.workspace }}/server
+          ls
+          cd ${{ github.workspace }}/server/renameme
           ls
       # - name: Print Environment Variables
       #   run: |
