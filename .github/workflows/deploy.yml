@@ -8,18 +8,9 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
+    tag:
+        description: 'The tag we want to deploy. E.g: v3.96.0'
+        required: true
 jobs:
   # Single deploy job since we're just deploying
   deploy:
@@ -44,6 +35,11 @@ jobs:
           echo "----------------"
           env
 
-      - name: Get Release Tag
+      - name: Set Next Tag
         run: |
-          echo "Tag associated with the release: ${{ github.event.release.tag_name }}"
+          if [[ "${{ github.event.release.tag_name }}" != "" ]]; then
+            TAG="${{ github.event.release.tag_name }}"
+          else
+            TAG= ${{ inputs.tag }}
+          fi
+          echo "Tag: $TAG"
