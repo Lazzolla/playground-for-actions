@@ -45,8 +45,17 @@ jobs:
           echo "----------------"
           env
 
-      - name: Print steps as envs Context
+      - name: Get Latest Release
+        id: latest-release
         run: |
-          echo "GitHub Context:"
-          echo "----------------"
-          echo ${{ steps.latestrelease }}
+          # Use the GitHub API to get information about the latest release
+          latest_release=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/username/repo/releases/latest")
+          
+          # Extract the version name from the JSON response
+          version=$(echo "$latest_release" | jq -r '.tag_name')
+          
+          echo "Latest Version: $version"
+          
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
