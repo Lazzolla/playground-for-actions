@@ -31,7 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Check envs
+      - name: Print Environment Variables
         run: |
-          echo ${{ env }}
-          echo ${{ github }}
+          echo "GitHub Repository: $GITHUB_REPOSITORY"
+          echo "GitHub Event Name: $GITHUB_EVENT_NAME"
+          echo "GitHub Actor: $GITHUB_ACTOR"
+          echo "GitHub Workflow: $GITHUB_WORKFLOW"
+          # You can add more environment variables as needed
+          
+      - name: Print GitHub Context
+        run: |
+          echo "GitHub Context:"
+          echo "----------------"
+          env | grep GITHUB
