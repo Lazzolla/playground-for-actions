@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'The tag we want to deploy. E.g: v3.96.0'
+        description: "The tag we want to deploy. E.g: v3.96.0"
         required: true
 jobs:
   # Single deploy job since we're just deploying
@@ -22,6 +22,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{inputs.tag}}
+          path: ~/server/renameme
       - name: Print Environment Variables
         run: |
           echo "GitHub Repository: $GITHUB_REPOSITORY"
@@ -35,7 +38,13 @@ jobs:
           echo "Env Context:"
           echo "----------------"
           env
-      - name: Check Input
-        run: |
-          echo ${{inputs.tag}}
 
+      # - name: Set Next Tag
+      #   run: |
+      #     if [ -n "${{ github.event.release.tag_name }}" ]
+      #     then
+      #       TAG="${{ github.event.release.tag_name }}"
+      #     else
+      #       TAG= "${{ inputs.tag }}"
+      #     fi
+      #     echo "Tag: $TAG"
