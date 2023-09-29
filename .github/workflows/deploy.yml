@@ -45,11 +45,6 @@ jobs:
           echo "----------------"
           env
 
-      - name: Print steps Context
-        run: |
-          echo "steps Context:"
-          echo "----------------"
-          steps
       - name: Print steps as envs Context
         run: |
           echo "GitHub Context:"
