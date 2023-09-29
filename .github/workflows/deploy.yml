@@ -49,4 +49,4 @@ jobs:
         run: |
           echo "GitHub Context:"
           echo "----------------"
-          cat ${{ steps }}
+          echo ${{ steps.latestrelease }}
