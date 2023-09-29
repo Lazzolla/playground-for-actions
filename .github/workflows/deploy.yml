@@ -38,7 +38,7 @@ jobs:
 
       - name: Set Next Tag
         run: |
-          if [ -n "${{ github.event.release.tag_name }}"" ]
+          if [ -n "${{ github.event.release.tag_name }}" ]
           then
             TAG="${{ github.event.release.tag_name }}"
           else
