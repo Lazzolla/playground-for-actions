@@ -1,10 +1,14 @@
 #! /bin/bash
 echo $1
-if [ $1 ]
-then 
-echo 1
+if [ -n "$1" ]
+then
+
+echo "Input argument exists."
+
+else
+
+echo "Input argument is missing."
+
 exit 1
-else 
-echo 2
-exit 2
+
 fi
