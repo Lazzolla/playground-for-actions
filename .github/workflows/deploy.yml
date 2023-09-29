@@ -35,13 +35,7 @@ jobs:
           echo "Env Context:"
           echo "----------------"
           env
-
-      - name: Set Next Tag
+      - name: Check Input
         run: |
-          if [ -n "${{ github.event.release.tag_name }}" ]
-          then
-            TAG="${{ github.event.release.tag_name }}"
-          else
-            TAG= "${{ inputs.tag }}"
-          fi
-          echo "Tag: $TAG"
+          echo ${{inputs.tag}}
+
