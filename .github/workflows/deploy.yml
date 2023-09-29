@@ -25,19 +25,24 @@ jobs:
         with:
           ref: ${{inputs.tag}}
           path: ~/server/renameme
-      - name: Print Environment Variables
+      - name: Check clone
         run: |
-          echo "GitHub Repository: $GITHUB_REPOSITORY"
-          echo "GitHub Event Name: $GITHUB_EVENT_NAME"
-          echo "GitHub Actor: $GITHUB_ACTOR"
-          echo "GitHub Workflow: $GITHUB_WORKFLOW"
-          # You can add more environment variables as needed
+          ls
+          cd ~/server
+          ls
+      # - name: Print Environment Variables
+      #   run: |
+      #     echo "GitHub Repository: $GITHUB_REPOSITORY"
+      #     echo "GitHub Event Name: $GITHUB_EVENT_NAME"
+      #     echo "GitHub Actor: $GITHUB_ACTOR"
+      #     echo "GitHub Workflow: $GITHUB_WORKFLOW"
+      #     # You can add more environment variables as needed
 
-      - name: Print Env Context
-        run: |
-          echo "Env Context:"
-          echo "----------------"
-          env
+      # - name: Print Env Context
+      #   run: |
+      #     echo "Env Context:"
+      #     echo "----------------"
+      #     env
 
       # - name: Set Next Tag
       #   run: |
