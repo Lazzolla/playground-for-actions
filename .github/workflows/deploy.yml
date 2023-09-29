@@ -20,6 +20,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check folders
+        run: | 
+          ls
       - name: Checkout
         uses: actions/checkout@v3
         with:
