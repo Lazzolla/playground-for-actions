@@ -3,9 +3,8 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["production"]
+  release:
+    types: [published]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -45,17 +44,6 @@ jobs:
           echo "----------------"
           env
 
-      - name: Get Latest Release
-        id: latest-release
+      - name: Get Release Tag
         run: |
-          # Use the GitHub API to get information about the latest release
-          latest_release=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/username/repo/releases/latest")
-          
-          # Extract the version name from the JSON response
-          version=$(echo "$latest_release" | jq -r '.tag_name')
-          
-          echo "Latest Version: $version"
-          
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "Tag associated with the release: ${{ github.event.release.tag_name }}"
