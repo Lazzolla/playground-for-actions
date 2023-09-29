@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{}}
       - name: Print Environment Variables
         run: |
           echo "GitHub Repository: $GITHUB_REPOSITORY"
@@ -38,15 +40,20 @@ jobs:
           echo "GitHub Actor: $GITHUB_ACTOR"
           echo "GitHub Workflow: $GITHUB_WORKFLOW"
           # You can add more environment variables as needed
-          
+
       - name: Print Env Context
         run: |
           echo "Env Context:"
           echo "----------------"
           env
-          
-      - name: Print GitHub Context
+
+      - name: Print steps Context
+        run: |
+          echo "steps Context:"
+          echo "----------------"
+          steps
+      - name: Print steps as envs Context
         run: |
           echo "GitHub Context:"
           echo "----------------"
-          github
+          ${{ steps }}
