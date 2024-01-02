@@ -7,6 +7,10 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "The branch or tag we want to deploy. E.g: v3.96.0"
+        required: true
 jobs:
   # Single deploy job since we're just deploying
   deploy:
@@ -17,9 +21,8 @@ jobs:
     steps:
       - name: Set Next Tag
         run: |
-          echo "${{ github.ref_name }}"
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/releases/next" ]]; then
-            TAG="releases/next"  # Use the SHA of the push commit for main
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            TAG="${{ github.sha }}"  # Use the SHA of the push commit for main
           else
             TAG="${{ inputs.tag }}"  # Use the provided input tag for manual triggers
           fi
