@@ -3,11 +3,10 @@
 name: Deploy static content to Pages
 
 on:
-  release:
-    types: [published]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    push:
+      branches:
+        - main
     inputs:
       tag:
         description: "The tag we want to deploy. E.g: v3.96.0"
@@ -22,11 +21,10 @@ jobs:
     steps:
       - name: Set Next Tag
         run: |
-          if [ -n "${{ github.event.release.tag_name }}" ]
-          then
-            TAG="${{ github.event.release.tag_name }}"
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            TAG="${{ github.sha }}"  # Use the SHA of the push commit for main
           else
-            TAG= "${{ inputs.tag }}"
+            TAG="${{ inputs.tag }}"  # Use the provided input tag for manual triggers
           fi
           echo "Tag: $TAG"
       # - name: Check folders
