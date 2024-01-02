@@ -3,10 +3,10 @@
 name: Deploy static content to Pages
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
-    push:
-      branches:
-        - main
     inputs:
       tag:
         description: "The tag we want to deploy. E.g: v3.96.0"
