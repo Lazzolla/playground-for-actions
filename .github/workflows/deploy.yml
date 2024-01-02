@@ -20,20 +20,29 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check folders
+     - name: Set Next Tag
         run: |
-          ls
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{inputs.tag}}
-          path: server/renameme
-      - name: Check clone
-        run: |
-          cd ${{ github.workspace }}/server
-          ls
-          cd ${{ github.workspace }}/server/renameme
-          ls
+          if [ -n "${{ github.event.release.tag_name }}" ]
+          then
+            TAG="${{ github.event.release.tag_name }}"
+          else
+            TAG= "${{ inputs.tag }}"
+          fi
+          echo "Tag: $TAG"
+      # - name: Check folders
+      #   run: |
+      #     ls
+      # - name: Checkout
+      #   uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{inputs.tag}}
+      #     path: server/renameme
+      # - name: Check clone
+      #   run: |
+      #     cd ${{ github.workspace }}/server
+      #     ls
+      #     cd ${{ github.workspace }}/server/renameme
+      #     ls
       # - name: Print Environment Variables
       #   run: |
       #     echo "GitHub Repository: $GITHUB_REPOSITORY"
