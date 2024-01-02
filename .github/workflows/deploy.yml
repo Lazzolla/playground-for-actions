@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Set Next Tag
         run: |
-          echo "${{ github.ref }}"
+          echo "${{ github.ref_name }}"
           if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/releases/next" ]]; then
             TAG="releases/next"  # Use the SHA of the push commit for main
           else
