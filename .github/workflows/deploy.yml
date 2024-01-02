@@ -20,7 +20,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-     - name: Set Next Tag
+      - name: Set Next Tag
         run: |
           if [ -n "${{ github.event.release.tag_name }}" ]
           then
